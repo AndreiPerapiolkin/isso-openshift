@@ -17,15 +17,17 @@ from isso import config as isso_config
 
 application = make_app(isso_config.load('production.cfg'))
 
-virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
+#virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + './virtenv/'
+virtenv = './virtenv/'
+
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
 try:
     execfile(virtualenv, dict(__file__=virtualenv))
 except IOError:
     pass
 
-ip = os.environ['OPENSHIFT_PYTHON_IP']
-port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
+ip = "0.0.0.0" # os.environ['OPENSHIFT_PYTHON_IP']
+port = 8080 # int(os.environ['OPENSHIFT_PYTHON_PORT'])
 
 
 def number_of_workers():
